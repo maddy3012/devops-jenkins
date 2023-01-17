@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Integrate') {
+            steps {
+                git branch: 'main', url: 'https://github.com/maddy3012/devops-jenkins.git'
+            }
+        }
+        stage('configure') {
+            steps {
+                sh 'sudo apt install apache2 -y'
+            }
+        }
+        stage('deploy') {
+            steps {
+                sh 'sudo cp -R * /var/www/html'
+            }
+        }
+    }
+}
